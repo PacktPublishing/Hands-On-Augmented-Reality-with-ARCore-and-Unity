@@ -5,13 +5,6 @@ using UnityEngine;
 
 public class ScaleManager : MonoBehaviour
 {
-    public static ScaleManager instance;
-
-    private Camera _camera;
-
-    public Vector3 pointOfInterest;
-    public Transform rootTransform;
-
     private Quaternion m_Rotation = Quaternion.identity;
     private Quaternion m_InvRotation = Quaternion.identity;
     public Quaternion rotation
@@ -69,15 +62,5 @@ public class ScaleManager : MonoBehaviour
         var poiInRootSpace = rootTransform.InverseTransformPoint(position - pointOfInterest);
         rootTransform.localPosition = m_InvRotation * (-poiInRootSpace * scale);
 
-    }
-
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(this);
-
-        instance = this;
-
-        _camera = Camera.main;
     }
 }
